@@ -1209,3 +1209,30 @@ p {
     padding: 25px 15px;
   }
 }
+
+/* Google 表單 iframe 樣式 */
+.google-form-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.google-form-iframe {
+  max-width: 640px;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 響應式調整 */
+@media screen and (max-width: 767px) {
+  .google-form-iframe {
+    height: 800px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .google-form-iframe {
+    height: 700px;
+  }
+}

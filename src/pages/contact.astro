@@ -80,57 +80,37 @@ import '../styles/global.css';
                     
                     <!-- 聯絡方式選項 -->
                     <div class="contact-options-grid">
-                        <!-- 暫時隱藏 Email 功能
-                        <a href="mailto:your-email@example.com?subject=預約靈氣療癒諮詢&body=親愛的 Deo：%0D%0A%0D%0A我想了解..." class="contact-option-card email">
-                            <span class="contact-icon">📧</span>
-                            <h3 class="contact-card-title">寫信給我</h3>
-                            <p class="contact-card-desc">點擊直接開啟您的郵件軟體，預設好主旨，讓您更方便書寫</p>
-                        </a>
-                        -->
-                        
                         <a href="https://lin.ee/0rnlwA1" target="_blank" class="contact-option-card line">
                             <span class="contact-icon">💬</span>
                             <h3 class="contact-card-title">LINE 聊聊</h3>
                             <p class="contact-card-desc">透過 LINE 更即時的對話，隨時分享您的想法與需求</p>
                         </a>
                         
-                        <!-- 暫時隱藏 Google Form 功能
-                        <a href="#" onclick="openGoogleForm()" class="contact-option-card google-form">
+                        <a href="#google-form" class="contact-option-card google-form">
                             <span class="contact-icon">📝</span>
                             <h3 class="contact-card-title">表單填寫</h3>
                             <p class="contact-card-desc">透過 Google 表單，結構化地告訴我您的需求</p>
                         </a>
-                        -->
                     </div>
                     
-                    <!-- 傳統表單區塊 -->
-                    <div class="contact-form-section">
-                        <h3 class="contact-form-title">或者，在這裡留下訊息</h3>
+                    <!-- Google 表單嵌入 -->
+                    <div class="contact-form-section" id="google-form">
+                        <h3 class="contact-form-title">填寫表單聯繫我</h3>
                         <p class="contact-form-desc">
-                            填寫下方表單，我會收到您的訊息並盡快回覆
+                            請填寫下方表單，我會收到您的訊息並盡快回覆
                         </p>
                         
-                        <form id="contactForm">
-                            <div class="form-group">
-                                <label for="name" class="form-label">您的名字</label>
-                                <input type="text" id="name" name="name" class="form-input" placeholder="我要怎麼稱呼您" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="email" class="form-label">聯絡信箱</label>
-                                <input type="email" id="email" name="email" class="form-input" placeholder="請輸入您的 Email" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="message" class="form-label">想對 Deo 說的話或詢問內容</label>
-                                <textarea id="message" name="message" class="form-textarea" placeholder="例：我想預約靈氣療癒，也想了解課程內容。" required></textarea>
-                            </div>
-                            
-                            <button type="submit" class="submit-button">靜靜送出這份訊息</button>
-                        </form>
-                        
-                        <div id="successMessage" class="success-message">
-                            謝謝你寫信給我。願這份心意，也被光溫柔擁抱。
+                        <div class="google-form-container">
+                            <iframe 
+                                src="https://docs.google.com/forms/d/e/1FAIpQLSfA2YkkBWIyzHnM6T7pIzCfEzo0aNH7TCTwkf0l_0WST1Oo8A/viewform?embedded=true" 
+                                width="100%" 
+                                height="945" 
+                                frameborder="0" 
+                                marginheight="0" 
+                                marginwidth="0"
+                                class="google-form-iframe">
+                                載入中…
+                            </iframe>
                         </div>
                     </div>
                 </div>
@@ -220,55 +200,6 @@ import '../styles/global.css';
                 }
             });
         });
-        
-        // Google Form 功能 (暫時隱藏)
-        /*
-        function openGoogleForm() {
-            // 替換成您的 Google Form 連結
-            window.open('https://forms.google.com/您的表單ID', '_blank');
-        }
-        */
-        
-        // 表單提交功能 (暫時隱藏 mailto)
-        /*
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            // 使用 mailto 發送
-            const subject = encodeURIComponent('來自 ' + name + ' 的訊息');
-            const body = encodeURIComponent(`姓名：${name}\n信箱：${email}\n\n訊息：\n${message}`);
-            
-            window.location.href = `mailto:your-email@example.com?subject=${subject}&body=${body}`;
-            
-            // 顯示成功訊息
-            document.getElementById('successMessage').style.display = 'block';
-            
-            // 3秒後隱藏成功訊息
-            setTimeout(() => {
-                document.getElementById('successMessage').style.display = 'none';
-            }, 3000);
-        });
-        */
-        
-        // 表單提交功能 (暫時只顯示訊息)
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // 只顯示成功訊息，不實際發送
-            document.getElementById('successMessage').style.display = 'block';
-            
-            // 5秒後隱藏成功訊息
-            setTimeout(() => {
-                document.getElementById('successMessage').style.display = 'none';
-            }, 5000);
-        });
-        
-        // 讓 openGoogleForm 成為全域函數 (暫時註解)
-        // window.openGoogleForm = openGoogleForm;
     </script>
 </body>
 </html>
