@@ -1,11 +1,38 @@
 import { Client } from '@notionhq/client'
 
+// 获取环境变量的函数，兼容不同环境
+function getEnvVar(name) {
+  // 优先使用 process.env（服务器端），fallback 到 import.meta.env（客户端）
+  if (typeof process !== 'undefined' && process.env) {
+    return process.env[name] || process.env[`VITE_${name}`]
+  }
+  
+  if (typeof import !== 'undefined' && import.meta && import.meta.env) {
+    return import.meta.env[name] || import.meta.env[`VITE_${name}`]
+  }
+  
+  return undefined
+}
+
+const NOTION_TOKEN = getEnvVar('NOTION_TOKEN')
+const NOTION_DATABASE_ID = getEnvVar('NOTION_DATABASE_ID')
+
+// 添加调试日志
+console.log('Environment check:')
+console.log('NOTION_TOKEN exists:', !!NOTION_TOKEN)
+console.log('NOTION_DATABASE_ID exists:', !!NOTION_DATABASE_ID)
+console.log('NOTION_TOKEN length:', NOTION_TOKEN?.length || 0)
+
 const notion = new Client({
-  auth: process.env.NOTION_TOKEN || import.meta.env.NOTION_TOKEN,
+  auth: NOTION_TOKEN,
 })
 
 async function getBlogPosts() {
-  const databaseId = process.env.NOTION_DATABASE_ID || import.meta.env.NOTION_DATABASE_ID
+  const databaseId = NOTION_DATABASE_ID
+
+  if (!databaseId) {
+    throw new Error('NOTION_DATABASE_ID is not set')
+  }
 
   const response = await notion.databases.query({
     database_id: databaseId,
@@ -35,7 +62,11 @@ async function getBlogPosts() {
 
 // 獲取單篇文章內容 - 從頁面內容讀取
 async function getBlogPost(slug) {
-  const databaseId = process.env.NOTION_DATABASE_ID || import.meta.env.NOTION_DATABASE_ID
+  const databaseId = NOTION_DATABASE_ID
+
+  if (!databaseId) {
+    throw new Error('NOTION_DATABASE_ID is not set')
+  }
 
   // 先根據 slug 找到文章
   const response = await notion.databases.query({

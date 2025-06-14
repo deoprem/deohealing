@@ -22,10 +22,17 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: npm install
+      - name: Debug environment variables
+        run: |
+          echo "NOTION_TOKEN exists: ${{ secrets.NOTION_TOKEN != '' }}"
+          echo "NOTION_DATABASE_ID exists: ${{ secrets.NOTION_DATABASE_ID != '' }}"
       - name: Build
+        env:
+          VITE_NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          VITE_NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
         run: npm run build
       - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v3  # 改成 v3
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
 
@@ -38,6 +45,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4  # 改成 v4
-  env:
-  NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        uses: actions/deploy-pages@v4
