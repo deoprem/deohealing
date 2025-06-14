@@ -1,5 +1,10 @@
 ---
-import "../styles/global.css";
+import { getBlogPosts } from '../lib/notion.js'
+import '../styles/global.css';
+
+// 獲取最新的 3 篇文章
+const allPosts = await getBlogPosts()
+const latestPosts = allPosts.slice(0, 3)
 ---
 
 <html lang="zh-TW">
@@ -156,33 +161,51 @@ import "../styles/global.css";
   </div>
 
   <!-- 文章區塊 -->
-  <div class="section">
+  <!-- 最新文章區塊 -->
+<div class="section">
     <div class="container">
-      <div class="blog-heading">
-        <h2 class="work-heading">開始你的療癒旅程</h2>
-      </div>
-      
-      <div class="collection-wrap">
-        <div class="blog-preview-wrap">
-          <a href="/post/heal-self-doubt" class="business-article-heading">如何療癒自我懷疑：讓「我不夠好」的聲音慢慢安靜下來</a>
-          <div class="label cc-blog-date">APR 17, 2025</div>
-          <p class="paragraph-light">你不需要完美，才能被愛。這篇文章，寫給總是懷疑自己、不知道值不值得的你。</p>
+        <div class="section-heading-wrap">
+            <h2 class="work-heading">開始你的療癒旅程</h2>
         </div>
         
-        <div class="blog-preview-wrap">
-          <a href="/post/reiki-energy-shift" class="business-article-heading">為什麼靈氣能帶來改變？來自能量流動的深層轉化</a>
-          <div class="label cc-blog-date">APR 13, 2025</div>
-          <p class="paragraph-light">靈氣不是神奇魔法，而是一種讓能量重新流動、喚醒內在療癒力的方式。當卡住的情緒與疲憊被柔光鬆開，身心就開始轉化。這股改變，常在靜默中發生，卻真實地帶你走回更自在的自己。</p>
+        <!-- 動態文章列表 -->
+        <div class="collection-wrap">
+            {latestPosts.map((post) => (
+                <div class="blog-preview-wrap">
+                    <a href={`/deohealing/blog/${post.slug}`}>
+                        {post.coverImage ? (
+                            <img 
+                                src={post.coverImage} 
+                                alt={post.title}
+                                style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 20px;"
+                            />
+                        ) : (
+                            <div style="width: 100%; height: 200px; background: linear-gradient(135deg, #66b6cc 0%, #32343a 100%); border-radius: 8px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px;">
+                                {post.title}
+                            </div>
+                        )}
+                    </a>
+                    
+                    <a href={`/deohealing/blog/${post.slug}`} class="business-article-heading">
+                        {post.title}
+                    </a>
+                    
+                    <div class="paragraph-light">
+                        {post.summary || ''}
+                    </div>
+                    
+                    <div class="label cc-blog-date">
+                        {new Date(post.date).toLocaleDateString('zh-TW', { 
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric' 
+                        })}
+                    </div>
+                </div>
+            ))}
         </div>
-        
-        <div class="blog-preview-wrap">
-          <a href="/post/reiki-first-session-guide" class="business-article-heading">靈氣療癒是怎麼進行的？第一次體驗前你會想知道的事</a>
-          <div class="label cc-blog-date">APR 13, 2025</div>
-          <p class="paragraph-light">靈氣療癒是一場讓身心歸於平靜的能量旅程，不需任何準備，只要靜靜躺下、讓光流動。療癒過程中，你可能感受到溫熱、放鬆，甚至進入深層的休息狀態。結束後，身心會慢慢轉變，找回內在的安定與柔軟。</p>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 
   <!-- CTA 區塊 -->
   <div class="section cc-cta">

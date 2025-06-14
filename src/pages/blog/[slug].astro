@@ -1,24 +1,53 @@
 ---
-// src/pages/blog/index.astro
-import { getBlogPosts } from '../../lib/notion.js'
+// blog/[slug].astro
 import '../../styles/global.css';
 
-const posts = await getBlogPosts()
+// 生成靜態路徑 - 必須 export
+export async function getStaticPaths() {
+  try {
+    // 動態導入避免構建時的問題
+    const { getBlogPosts } = await import('../../lib/notion.js')
+    const posts = await getBlogPosts()
+    
+    return posts.map((post) => ({
+      params: { slug: post.slug },
+    }))
+  } catch (error) {
+    console.error('Error in getStaticPaths:', error)
+    return []
+  }
+}
+
+// 獲取當前文章數據
+const { slug } = Astro.params
+let post
+
+try {
+  const { getBlogPost } = await import('../../lib/notion.js')
+  post = await getBlogPost(slug)
+} catch (error) {
+  console.error('Error fetching blog post:', error)
+  return Astro.redirect('/404')
+}
+
+if (!post) {
+  return Astro.redirect('/404')
+}
 ---
 
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="utf-8"/>
-    <title>靈氣療癒部落格｜Deo Healing 和光天澄</title>
-    <meta content="深入閱讀靈氣療癒、能量轉化與靜心實踐的真實分享，由靈氣導師 Deo 用溫柔文字陪你回到內在光源。" name="description"/>
-    <meta content="靈氣療癒部落格｜Deo Healing 和光天澄" property="og:title"/>
-    <meta content="深入閱讀靈氣療癒、能量轉化與靜心實踐的真實分享，由靈氣導師 Deo 用溫柔文字陪你回到內在光源。" property="og:description"/>
-    <meta content="https://cdn.prod.website-files.com/67fb69191746ed16336a6102/67fd264f24f603e269f38118_Open%20Graph.png" property="og:image"/>
-    <meta content="靈氣療癒部落格｜Deo Healing 和光天澄" property="twitter:title"/>
-    <meta content="深入閱讀靈氣療癒、能量轉化與靜心實踐的真實分享，由靈氣導師 Deo 用溫柔文字陪你回到內在光源。" property="twitter:description"/>
-    <meta content="https://cdn.prod.website-files.com/67fb69191746ed16336a6102/67fd264f24f603e269f38118_Open%20Graph.png" property="twitter:image"/>
-    <meta property="og:type" content="website"/>
+    <title>{post.title} | 靈氣療癒部落格 | Deo Healing 和光天澄</title>
+    <meta content={post.metaDescription || post.summary || post.title} name="description"/>
+    <meta content={`${post.title}｜靈氣療癒部落格｜Deo Healing 和光天澄`} property="og:title"/>
+    <meta content={post.metaDescription || post.summary || post.title} property="og:description"/>
+    <meta content={post.coverImage || "https://cdn.prod.website-files.com/67fb69191746ed16336a6102/67fd264f24f603e269f38118_Open%20Graph.png"} property="og:image"/>
+    <meta content={`${post.title}｜靈氣療癒部落格｜Deo Healing 和光天澄`} property="twitter:title"/>
+    <meta content={post.metaDescription || post.summary || post.title} property="twitter:description"/>
+    <meta content={post.coverImage || "https://cdn.prod.website-files.com/67fb69191746ed16336a6102/67fd264f24f603e269f38118_Open%20Graph.png"} property="twitter:image"/>
+    <meta property="og:type" content="article"/>
     <meta content="summary_large_image" name="twitter:card"/>
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="k5Bmk6Cy5aXG85mPbnY3Y8okD5YiYMdP7FJBud3U8Xc" name="google-site-verification"/>
@@ -40,7 +69,7 @@ const posts = await getBlogPosts()
                 <a href="/deohealing/aboutdeo" class="navigation-item">關於Deo</a>
                 <a href="/deohealing/services" class="navigation-item">服務項目</a>
                 <a href="/deohealing/courses" class="navigation-item">課程資訊</a>
-                <a href="/deohealing/blog" class="navigation-item w--current">靈氣文章</a>
+                <a href="/deohealing/blog" class="navigation-item">靈氣文章</a>
                 <a href="/deohealing/contact" class="navigation-item">聯絡我</a>
             </nav>
             <!-- 手機版漢堡選單按鈕 -->
@@ -63,62 +92,55 @@ const posts = await getBlogPosts()
                 <a href="/deohealing/aboutdeo" class="mobile-navigation-item">關於Deo</a>
                 <a href="/deohealing/services" class="mobile-navigation-item">服務項目</a>
                 <a href="/deohealing/courses" class="mobile-navigation-item">課程資訊</a>
-                <a href="/deohealing/blog" class="mobile-navigation-item w--current">靈氣文章</a>
+                <a href="/deohealing/blog" class="mobile-navigation-item">靈氣文章</a>
                 <a href="/deohealing/contact" class="mobile-navigation-item">聯絡我</a>
             </nav>
         </div>
     </div>
 
-    <!-- Hero 區塊 -->
-    <div class="section cc-home-wrap">
-        <div class="intro-header cc-subpage">
-            <div class="intro-content">
-                <div class="heading-jumbo">
-                    靈氣文章
-                    <br>
+    <!-- 文章內容區塊 -->
+    <div class="section">
+        <div class="container">
+            <div class="cc-blog-detail">
+                <!-- 文章標題和日期 -->
+                <div class="blog-detail-header-wrap">
+                    <h1>{post.title}</h1>
+                    <div class="label cc-blog-date">
+                        {new Date(post.date).toLocaleDateString('zh-TW', { 
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric' 
+                        })}
+                    </div>
+                </div>
+                
+                <!-- 封面圖片 -->
+                {post.coverImage && (
+                    <div 
+                        style={`background-image:url("${post.coverImage}")`} 
+                        class="detail-header-image">
+                    </div>
+                )}
+                
+                <!-- 文章內容 -->
+                <div class="rich-text w-richtext">
+                    {post.content && post.contentHtml ? (
+                        <div set:html={post.contentHtml}></div>
+                    ) : (
+                        <p>文章內容載入中...</p>
+                    )}
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 部落格文章列表 -->
+    <!-- 返回文章列表 -->
     <div class="section">
         <div class="container">
-            <div class="section-heading-wrap">
-                <div class="label cc-light"></div>
-                <h2>我們的故事</h2>
-            </div>
-            
-            <!-- 文章列表 -->
-            <div class="w-dyn-list">
-                <div role="list" class="blog-list-wrap w-dyn-items">
-                    {posts.map((post) => (
-                        <div role="listitem" class="blog-item w-dyn-item">
-                            {post.coverImage && (
-                                <a 
-                                    style={`background-image:url("${post.coverImage}")`} 
-                                    href={`/deohealing/blog/${post.slug}`} 
-                                    class="blog-preview-image w-inline-block">
-                                </a>
-                            )}
-                            <div class="blog-summary-wrap">
-                                <a href={`/deohealing/blog/${post.slug}`} class="blog-heading-link">
-                                    {post.title}
-                                </a>
-                                <div class="paragraph-light">
-                                    {post.summary || ''}
-                                </div>
-                                <div class="label cc-blog-date">
-                                    {new Date(post.date).toLocaleDateString('zh-TW', { 
-                                        year: 'numeric', 
-                                        month: 'long', 
-                                        day: 'numeric' 
-                                    })}
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+            <div style="text-align: center; margin: 40px 0;">
+                <a href="/deohealing/blog" class="primary-button">
+                    返回文章列表
+                </a>
             </div>
         </div>
     </div>
