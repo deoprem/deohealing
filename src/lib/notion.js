@@ -1,41 +1,30 @@
 import { Client } from '@notionhq/client'
 
-// 获取环境变量的函数，兼容不同环境
-function getEnvVar(name) {
-  // 优先使用 process.env（服务器端），fallback 到 import.meta.env（客户端）
-  if (typeof process !== 'undefined' && process.env) {
-    return process.env[name] || process.env[`VITE_${name}`]
-  }
-  
-  if (typeof import !== 'undefined' && import.meta && import.meta.env) {
-    return import.meta.env[name] || import.meta.env[`VITE_${name}`]
-  }
-  
-  return undefined
-}
-
-const NOTION_TOKEN = getEnvVar('NOTION_TOKEN')
-const NOTION_DATABASE_ID = getEnvVar('NOTION_DATABASE_ID')
+// 简化的环境变量获取
+const NOTION_TOKEN = process.env.VITE_NOTION_TOKEN || import.meta.env.VITE_NOTION_TOKEN || process.env.NOTION_TOKEN || import.meta.env.NOTION_TOKEN
+const NOTION_DATABASE_ID = process.env.VITE_NOTION_DATABASE_ID || import.meta.env.VITE_NOTION_DATABASE_ID || process.env.NOTION_DATABASE_ID || import.meta.env.NOTION_DATABASE_ID
 
 // 添加调试日志
 console.log('Environment check:')
 console.log('NOTION_TOKEN exists:', !!NOTION_TOKEN)
 console.log('NOTION_DATABASE_ID exists:', !!NOTION_DATABASE_ID)
-console.log('NOTION_TOKEN length:', NOTION_TOKEN?.length || 0)
+console.log('NOTION_TOKEN length:', NOTION_TOKEN ? NOTION_TOKEN.length : 0)
+
+if (!NOTION_TOKEN) {
+  throw new Error('NOTION_TOKEN is not set')
+}
+
+if (!NOTION_DATABASE_ID) {
+  throw new Error('NOTION_DATABASE_ID is not set')
+}
 
 const notion = new Client({
   auth: NOTION_TOKEN,
 })
 
 async function getBlogPosts() {
-  const databaseId = NOTION_DATABASE_ID
-
-  if (!databaseId) {
-    throw new Error('NOTION_DATABASE_ID is not set')
-  }
-
   const response = await notion.databases.query({
-    database_id: databaseId,
+    database_id: NOTION_DATABASE_ID,
     filter: {
       property: 'Published',
       checkbox: { equals: true },
@@ -49,28 +38,20 @@ async function getBlogPosts() {
   })
 
   return response.results.map((post) => ({
-    id: post.id, // 頁面 ID，用來抓取內容
+    id: post.id,
     title: post.properties.Name.title[0]?.plain_text || '未命名',
     slug: post.properties.Slug.rich_text[0]?.plain_text || 'no-slug',
     date: post.properties.Date.date?.start || '',
     summary: post.properties.Summary.rich_text[0]?.plain_text || '',
-    // 如果有封面圖片的話
     coverImage: post.properties['Cover Image']?.files[0]?.file?.url || 
                 post.properties['Cover Image']?.files[0]?.external?.url || null,
   }))
 }
 
-// 獲取單篇文章內容 - 從頁面內容讀取
 async function getBlogPost(slug) {
-  const databaseId = NOTION_DATABASE_ID
-
-  if (!databaseId) {
-    throw new Error('NOTION_DATABASE_ID is not set')
-  }
-
   // 先根據 slug 找到文章
   const response = await notion.databases.query({
-    database_id: databaseId,
+    database_id: NOTION_DATABASE_ID,
     filter: {
       and: [
         {
@@ -109,7 +90,6 @@ async function getBlogPost(slug) {
   }
 }
 
-// 獲取 Notion 頁面內容並轉換為 HTML
 async function getNotionPageContent(pageId) {
   try {
     const blocks = await notion.blocks.children.list({
@@ -138,7 +118,6 @@ async function getNotionPageContent(pageId) {
   }
 }
 
-// 處理 Notion 區塊
 function processNotionBlock(block) {
   const type = block.type
   let markdown = ''
@@ -207,7 +186,6 @@ function processNotionBlock(block) {
       break
       
     default:
-      // 對於未處理的區塊類型，嘗試提取文字
       console.log(`未處理的區塊類型: ${type}`)
       break
   }
@@ -215,7 +193,6 @@ function processNotionBlock(block) {
   return { markdown, html }
 }
 
-// 從 rich_text 陣列中提取純文字
 function extractTextFromRichText(richTextArray) {
   if (!richTextArray || !Array.isArray(richTextArray)) {
     return ''
@@ -224,12 +201,8 @@ function extractTextFromRichText(richTextArray) {
   return richTextArray.map(item => item.plain_text || '').join('')
 }
 
-// 轉換行內樣式（粗體、斜體等）
 function convertInlineStyles(text) {
-  // 這裡可以根據需要擴展更多樣式轉換
-  // 目前保持簡單，後續可以根據 rich_text 的 annotations 來處理樣式
   return text
 }
 
-// Export 函數
 export { getBlogPosts, getBlogPost }
