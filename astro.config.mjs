@@ -4,8 +4,8 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://deoprem.github.io',
-  base: '/deohealing',
+  site: 'https://deoheal.com',
+  //base: '/deohealing',
   integrations: [mdx(), sitemap()],
 
   vite: {
