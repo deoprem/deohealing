@@ -40,4 +40,5 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4  # 改成 v4
   env:
-  NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+  VITE_NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+  VITE_NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
