@@ -1,11 +1,11 @@
 import { Client } from '@notionhq/client'
 
 const notion = new Client({
-  auth: import.meta.env.NOTION_TOKEN,
+  auth: process.env.NOTION_TOKEN || import.meta.env.NOTION_TOKEN,
 })
 
 async function getBlogPosts() {
-  const databaseId = import.meta.env.NOTION_DATABASE_ID
+  const databaseId = process.env.NOTION_DATABASE_ID || import.meta.env.NOTION_DATABASE_ID
 
   const response = await notion.databases.query({
     database_id: databaseId,
@@ -35,7 +35,7 @@ async function getBlogPosts() {
 
 // 獲取單篇文章內容 - 從頁面內容讀取
 async function getBlogPost(slug) {
-  const databaseId = import.meta.env.NOTION_DATABASE_ID
+  const databaseId = process.env.NOTION_DATABASE_ID || import.meta.env.NOTION_DATABASE_ID
 
   // 先根據 slug 找到文章
   const response = await notion.databases.query({
