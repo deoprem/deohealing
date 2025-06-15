@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import type { APIRoute } from 'astro'
 import { getBlogPosts } from '../lib/notion.js'
+import he from 'he' // HTML entity encoder
 
 export const GET: APIRoute = async () => {
   const posts = await getBlogPosts()
@@ -15,19 +16,19 @@ export const GET: APIRoute = async () => {
       file.endsWith('.astro') &&
       !file.startsWith('[') &&
       !file.startsWith('_') &&
-      !file.includes('sitemap') && // 避免抓自己
-      !file.includes('404')        // 避免 404 頁
+      !file.includes('sitemap') &&
+      !file.includes('404')
     )
     .map((file) => {
       const name = file === 'index.astro' ? '' : file.replace('.astro', '')
       return {
-        loc: `https://deoheal.com/${name}`,
-        lastmod: new Date().toISOString(), // 可改成每頁自己的更新時間
+        loc: `https://deoheal.com/${he.encode(name)}`, // encode 靜態頁面網址
+        lastmod: new Date().toISOString(),
       }
     })
 
   const blogPages = posts.map((post) => ({
-    loc: `https://deoheal.com/blog/${post.slug}`,
+    loc: `https://deoheal.com/blog/${he.encode(post.slug)}`, // encode slug 防止注入
     lastmod: new Date(post.date).toISOString(),
   }))
 
