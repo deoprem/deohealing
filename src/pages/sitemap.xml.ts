@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro'
-import { getBlogPosts } from '../../lib/notion.js'
+import { getBlogPosts } from '../lib/notion.js'
 
 export const GET: APIRoute = async () => {
   const posts = await getBlogPosts()
