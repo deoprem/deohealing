@@ -208,7 +208,7 @@ p {
 .intro-header {
   color: #fff;
   background-color: #f4f4f4;
-  background-image: url("portfolio 2 - wide.png");
+  background-image: url("/portfolio 2 - wide.png");
   background-size: cover;
   background-position: center;
   display: flex;
