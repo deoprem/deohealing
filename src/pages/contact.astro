@@ -86,39 +86,80 @@ import '../styles/global.css';
                         <a href="https://lin.ee/0rnlwA1" target="_blank" class="contact-option-card line">
                             <span class="contact-icon">💬</span>
                             <h3 class="contact-card-title">LINE 聊聊</h3>
-                            <p class="contact-card-desc">如果你喜歡即時對話，歡迎透過 LINE 和我聊聊，<br>
+                            <p class="contact-card-desc">如果你喜歡即時對話，<br>歡迎透過 LINE 和我聊聊，<br>
 隨時分享你的感受與想法，我會靜靜聆聽。</p>
                         </a>
                         
-                        <a href="#google-form" class="contact-option-card google-form">
+                        <a href="#reiki-form" class="contact-option-card google-form">
                             <span class="contact-icon">📝</span>
-                            <h3 class="contact-card-title">表單填寫</h3>
-                            <p class="contact-card-desc">如果你習慣先整理思緒，<br>
-可以用表單溫柔寫下你的需求，我會一一細讀並回應。</p>
+                            <h3 class="contact-card-title">填寫聯絡表單</h3>
+<p class="contact-card-desc">你可以安靜地寫下內心的聲音，<br>
+我會在收到後，仔細閱讀並回覆你。</p>
                         </a>
                     </div>
                     
                     <!-- Google 表單嵌入 -->
-                    <div class="contact-form-section" id="google-form">
-                        <h3 class="contact-form-title">填寫表單聯繫我</h3>
-                        <p class="contact-form-desc">
-                            請填寫下方表單，我會收到您的訊息並盡快回覆
-                        </p>
-                        
-                        <div class="google-form-container">
-                            <iframe 
-                                src="https://docs.google.com/forms/d/e/1FAIpQLSfA2YkkBWIyzHnM6T7pIzCfEzo0aNH7TCTwkf0l_0WST1Oo8A/viewform?embedded=true" 
-                                width="100%" 
-                                height="1150" 
-                                frameborder="0" 
-                                marginheight="0" 
-                                marginwidth="0"
-                                class="google-form-iframe">
-                                載入中…
-                            </iframe>
-                        </div>
-                        
-                    </div>
+                 <!-- 表單區塊 -->
+<form id="reiki-form">
+  <label>您的名字</label>
+  <input type="text" name="name" required placeholder="我要怎麼稱呼您" />
+
+  <label>聯絡信箱</label>
+  <input type="email" name="email" required placeholder="請輸入您的Email" />
+
+  <label>想對 DEO 說的話或詢問內容</label>
+  <textarea name="message" required placeholder="例：我想預約靈氣療癒，也想了解課程內容"></textarea>
+
+  <button type="submit">送出這份訊息</button>
+</form>
+
+<!-- 成功提示浮出框 -->
+<div id="thankyou-overlay">
+  <div id="thankyou-box">
+    🌸 謝謝你寫信給我。<br>願這份心意，也被光溫柔擁抱。
+  </div>
+</div>
+
+<!-- 表單處理邏輯 -->
+<script>
+  document.getElementById("reiki-form").addEventListener("submit", function(e) {
+    
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const params = new URLSearchParams(formData);
+
+
+    fetch("https://script.google.com/macros/s/AKfycbxEBACXF7w9LaPQDef9tx0_kx4_-UQb-mO-sQ_1jO0APRQXpKMdhKfhUCDEl62rXgLg/exec", {
+      method: "POST",
+      body: params,
+    })
+    .then(() => {
+      form.reset();
+
+      const overlay = document.getElementById("thankyou-overlay");
+      const box = document.getElementById("thankyou-box");
+
+      overlay.style.display = "flex";
+      box.classList.add("fade-in");
+
+      setTimeout(() => {
+        box.classList.remove("fade-in");
+        box.classList.add("fade-out");
+        setTimeout(() => {
+          overlay.style.display = "none";
+          box.classList.remove("fade-out");
+        }, 1000);
+      }, 3000);
+    })
+    .catch(() => {
+      alert("⚠️ 送出失敗，請稍後再試。");
+    });
+    console.log("留言欄位送出的內容是：", formData.get("message"));
+  });
+  
+  
+</script>
                 </div>
             </div>
         </div>
