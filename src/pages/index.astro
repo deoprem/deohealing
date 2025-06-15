@@ -1,0 +1,333 @@
+---
+import { getBlogPosts } from '../lib/notion.js'
+import '../styles/global.css';
+
+// 獲取最新的 3 篇文章
+const allPosts = await getBlogPosts()
+const latestPosts = allPosts.slice(0, 3)
+---
+
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deo Healing 和光天澄｜靈氣療癒・冥想課程・能量平衡空間</title>
+  <meta name="description" content="願靈氣的光，帶你回到安心立命的地方。Deo Healing 和光天澄提供靈氣療癒、教學課程與靜心冥想，陪你走一段回到自己內在的旅程。" />
+
+<!-- Favicon -->
+
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+<!-- 導覽列 - 修正版 -->
+<div class="navigation">
+  <div class="navigation-wrap">
+    <a href="/" class="logo-link w-inline-block">
+      <img src="/business-logo3@2x.png" width="250" alt="Deo Healing Logo" class="logo-image"/>
+    </a>
+    
+    <!-- 桌面版導覽 -->
+    <nav class="navigation-items">
+      <a href="/" class="navigation-item w--current">首頁</a>
+      <a href="/aboutdeo" class="navigation-item">關於Deo</a>
+      <a href="/services" class="navigation-item">服務項目</a>
+      <a href="/courses" class="navigation-item">課程資訊</a>
+      <a href="/blog" class="navigation-item">靈氣文章</a>
+      <a href="/contact" class="navigation-item">聯絡我</a>
+    </nav>
+    
+    <!-- 手機版漢堡選單按鈕 -->
+    <div class="menu-button w-nav-button" id="mobile-menu-btn">
+      <div class="menu-icon">
+        <div class="menu-line"></div>
+        <div class="menu-line"></div>
+        <div class="menu-line"></div>
+      </div>
+    </div>
+    
+    <!-- 桌面版聯絡按鈕 -->
+    <a href="/contact" class="primary-button cc-contact-us">
+      聯絡我
+    </a>
+  </div>
+  
+  <!-- 手機版導覽選單 -->
+  <div class="mobile-menu" id="mobile-menu">
+    <nav class="mobile-navigation-items">
+      <a href="/" class="mobile-navigation-item w--current">首頁</a>
+      <a href="/aboutdeo" class="mobile-navigation-item">關於Deo</a>
+      <a href="/services" class="mobile-navigation-item">服務項目</a>
+      <a href="/courses" class="mobile-navigation-item">課程資訊</a>
+      <a href="/blog" class="mobile-navigation-item">靈氣文章</a>
+      <a href="/contact" class="mobile-navigation-item">聯絡我</a>
+    </nav>
+  </div>
+</div>
+
+  <!-- Hero 區塊 -->
+  <div class="section cc-store-home-wrap">
+    <div class="intro-header">
+      <div class="intro-content cc-homepage">
+        <div class="intro-text">
+          <div class="heading-jumbo">
+            願這道光<br/>能溫柔照進你的心裡
+          </div>
+          <div class="paragraph-bigger cc-bigger-white-light">
+            透過靈氣療癒與靜心陪伴，找回你本來的力量與平靜
+          </div>
+        </div>
+        <a href="/courses" class="secondary-button w-inline-block">
+          從這裡開始，一起回到內在的平靜
+        </a>
+      </div>
+    </div>
+
+    <!-- 主要內容容器 -->
+    <div class="container">
+      <!-- 信念文字段 -->
+      <div class="motto-wrap">
+        <div class="label cc-light">我們相信 溫柔與真實，是療癒真正的起點</div>
+        <div class="heading-jumbo-small">
+          療癒不是修補，而是重新與自己相遇
+        </div>
+        <div class="label cc-light">回家的路，是安住在自己心裡的那份寧靜</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="home-content-wrap">
+        <!-- 關於 Deo 區塊 -->
+        <div class="about-grid">
+          <div>
+            <div class="home-section-wrap">
+              <div class="label cc-light">靜靜地，走近我一點點</div>
+              <h2 class="section-heading">關於Deo</h2>
+              <p class="paragraph-light">
+                嗨，我是 Deo，一位靈氣老師，也是一個相信「療癒可以成為日常練習」的人。
+              </p>
+              <p class="paragraph-light">
+                對我來說，靈氣不是神秘的儀式，而是一種溫柔而樸實的陪伴——
+              </p>
+              <p class="paragraph-light">
+                就像把手輕輕放在胸口，回到自己，安住在當下。
+              </p>
+              <p class="paragraph-light">
+                白天我在資訊產業工作，熟悉邏輯與系統；而靈氣教會我傾聽身體、感受能量，也學會穩穩站在自己生命的位置上。
+              </p>
+              <p class="paragraph-light">
+                現在的我，想把這份穩定與溫柔分享給你，陪你回到心裡最安靜的那個地方。
+              </p>
+            </div>
+            <a href="/aboutdeo" class="primary-button w-inline-block">
+              從這裡開始認識我
+            </a>
+          </div>
+          <img src="/home-about.png" alt="About me" style="width: 100%; height: auto; object-fit: cover; border-radius: 8px;"/>
+        </div>
+
+      
+    <!-- 服務理念區塊 - 修正版（圖片在左，文字在右）-->
+<div class="about-grid cc-about-2">
+  <!-- 先放圖片 -->
+  <img src="/home2.png" alt="Service" style="width: 100%; height: auto; object-fit: cover; border-radius: 8px;"/>
+  
+  <!-- 後放文字 -->
+  <div>
+    <div class="home-section-wrap">
+      <div class="label cc-light">服務理念</div>
+      <h2 class="section-heading">讓光重新照進心裡的地方</h2>
+      <p class="paragraph-light">
+        在「Deo Healing 和光天澄」，我們相信，每個人內在都有一處寧靜清澄的光之源。
+      </p>
+      <p class="paragraph-light">
+        透過靈氣療癒、靜心冥想與能量覺察，我們陪伴你回到那個安心立命的地方，與自己重新連結。
+      </p>
+      <p class="paragraph-light">
+        這不只是療癒的過程，更是一場深刻的內在旅程——
+      </p>
+      <p class="paragraph-light">
+        讓你的身心靈回歸平衡，讓生活重新展現純粹與喜悅。
+      </p>
+    </div>
+    <a href="/courses" class="primary-button w-inline-block">
+      展開你的內在旅程
+    </a>
+  </div>
+</div>
+    
+</div>
+    </div>
+  </div>
+
+  <!-- 文章區塊 -->
+  <!-- 最新文章區塊 -->
+<div class="section">
+    <div class="container">
+        <div class="section-heading-wrap">
+            <h2 class="work-heading">開始你的療癒旅程</h2>
+        </div>
+        
+        <!-- 動態文章列表 -->
+        <div class="collection-wrap">
+            {latestPosts.map((post) => (
+                <div class="blog-preview-wrap">
+                    <a href={`/blog/${post.slug}`}>
+                        {post.coverImage ? (
+                            <img 
+                                src={post.coverImage} 
+                                alt={post.title}
+                                style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 20px;"
+                            />
+                        ) : (
+                            <div style="width: 100%; height: 200px; background: linear-gradient(135deg, #66b6cc 0%, #32343a 100%); border-radius: 8px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px;">
+                                {post.title}
+                            </div>
+                        )}
+                    </a>
+                    
+                    <a href={`/blog/${post.slug}`} class="business-article-heading">
+                        {post.title}
+                    </a>
+                    
+                    <div class="paragraph-light">
+                        {post.summary || ''}
+                    </div>
+                    
+                    <div class="label cc-blog-date">
+                        {new Date(post.date).toLocaleDateString('zh-TW', { 
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric' 
+                        })}
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+</div>
+
+  <!-- CTA 區塊 -->
+  <div class="section cc-cta">
+    <div class="container">
+      <div class="cta-wrap">
+        <div>
+          <div class="cta-text">
+            <div class="heading-jumbo-small">
+              願你從今天開始，好好照顧自己的身心
+            </div>
+            <div class="paragraph-bigger cc-bigger-light">
+              也許你也在尋找一種方式，讓內在回歸平靜與清明。在這裡，你不必急著改變什麼，只要允許自己——被好好接住。
+            </div>
+          </div>
+          <a href="/contact" class="primary-button cc-jumbo-button w-inline-block">
+            寫封信給我，也許從這裡開始
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="section">
+    <div class="container">
+      <div class="footer-wrap">
+        <img src="/webclip_256x256.png" loading="lazy" width="60" alt="" class="image-3"/>
+        
+        <p class="paragraph-2">
+          <span class="text-span">
+            <strong>Deo Healing 和光天澄</strong>
+          </span>
+        </p>
+        
+        <p class="paragraph-3"><span class="nobr">願靈氣的光，陪你走回內在的安定與明亮。</span></p>
+        
+        <a href="https://lin.ee/0rnlwA1" target="_blank" style="display: inline-block; text-decoration: none;">
+          <img src="/LINE_Brand_icon.png" loading="lazy" width="30" alt="" class="image-4"/>
+        </a>
+        
+        <p class="paragraph-4">
+          <span class="text-span-2">© 2025 <span class="nobr">Deo Healing 和光天澄</span>. 保留所有權利。</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 簡單的動畫效果 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 添加淡入動畫
+      const fadeElements = document.querySelectorAll('.heading-jumbo, .paragraph-bigger, .section-heading');
+      
+      fadeElements.forEach((el, index) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        
+        setTimeout(() => {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        }, index * 100 + 200);
+      });
+    });
+  </script>
+  <!-- 在你的 index.astro 的 </body> 標籤前添加這段 JavaScript -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const body = document.body;
+
+    // 漢堡選單點擊事件
+    menuBtn.addEventListener('click', function() {
+      const isActive = menuBtn.classList.contains('active');
+      
+      if (isActive) {
+        // 關閉選單
+        menuBtn.classList.remove('active');
+        mobileMenu.classList.remove('show');
+        body.style.overflow = ''; // 恢復捲動
+      } else {
+        // 開啟選單
+        menuBtn.classList.add('active');
+        mobileMenu.classList.add('show');
+        body.style.overflow = 'hidden'; // 禁止背景捲動
+      }
+    });
+
+    // 點擊選單項目後關閉選單
+    const mobileNavItems = document.querySelectorAll('.mobile-navigation-item');
+    mobileNavItems.forEach(item => {
+      item.addEventListener('click', function() {
+        menuBtn.classList.remove('active');
+        mobileMenu.classList.remove('show');
+        body.style.overflow = '';
+      });
+    });
+
+    // 點擊選單外部關閉選單
+    mobileMenu.addEventListener('click', function(e) {
+      if (e.target === mobileMenu) {
+        menuBtn.classList.remove('active');
+        mobileMenu.classList.remove('show');
+        body.style.overflow = '';
+      }
+    });
+
+    // 原有的淡入動畫
+    const fadeElements = document.querySelectorAll('.heading-jumbo, .paragraph-bigger, .section-heading');
+    
+    fadeElements.forEach((el, index) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      
+      setTimeout(() => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }, index * 100 + 200);
+    });
+  });
+</script>
+</body>
+</html>

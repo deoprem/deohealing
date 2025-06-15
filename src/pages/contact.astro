@@ -1,0 +1,211 @@
+---
+// Astro frontmatter - 在這裡導入 CSS
+import '../styles/global.css';
+---
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>聯絡我們｜預約靈氣療癒與課程諮詢｜Deo Healing 和光天澄</title>
+    <meta name="description" content="想預約靈氣療癒、詢問課程、或與 Deo 聯繫合作，都歡迎從這裡留言給我們。Deo Healing 和光天澄，溫柔回應每一份來自心的訊息。">
+    <link rel="preload" as="image" href="/aboutDeo2.png">
+</head>
+<body>
+    <!-- 導覽列 -->
+    <div class="navigation">
+        <div class="navigation-wrap">
+            <a href="/" class="logo-link w-inline-block">
+                <img src="/business-logo3@2x.png" width="250" alt="Deo Healing Logo" class="logo-image">
+            </a>
+            <!-- 桌面版導覽 -->
+            <nav class="navigation-items">
+                <a href="/" class="navigation-item">首頁</a>
+                <a href="/aboutdeo" class="navigation-item">關於Deo</a>
+                <a href="/services" class="navigation-item">服務項目</a>
+                <a href="/courses" class="navigation-item">課程資訊</a>
+                <a href="/blog" class="navigation-item">靈氣文章</a>
+                <a href="/contact" class="navigation-item w--current">聯絡我</a>
+            </nav>
+            <!-- 手機版漢堡選單按鈕 -->
+            <div class="menu-button w-nav-button" id="mobile-menu-btn">
+                <div class="menu-icon">
+                    <div class="menu-line"></div>
+                    <div class="menu-line"></div>
+                    <div class="menu-line"></div>
+                </div>
+            </div>
+            <!-- 桌面版聯絡按鈕 -->
+            <a href="/contact" class="primary-button cc-contact-us">
+                聯絡我
+            </a>
+        </div>
+        <!-- 手機版導覽選單 -->
+        <div class="mobile-menu" id="mobile-menu">
+            <nav class="mobile-navigation-items">
+                <a href="/" class="mobile-navigation-item">首頁</a>
+                <a href="/aboutdeo" class="mobile-navigation-item">關於Deo</a>
+                <a href="/services" class="mobile-navigation-item">服務項目</a>
+                <a href="/courses" class="mobile-navigation-item">課程資訊</a>
+                <a href="/blog" class="mobile-navigation-item">靈氣文章</a>
+                <a href="/contact" class="mobile-navigation-item w--current">聯絡我</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Hero 區塊 -->
+    <div class="section cc-home-wrap">
+        <div class="intro-header cc-subpage">
+            <div class="intro-content">
+                <div class="heading-jumbo">
+                    聯絡我
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 聯絡內容區塊 -->
+    <div class="section">
+        <div class="container">
+            <div class="section-heading-wrap">
+                <div class="label cc-light">聯絡方式</div>
+                <h2 class="heading-3">選擇最舒適的方式與我聯繫</h2>
+                <div class="course-content-container">
+                    <p class="contact-section-paragraph">
+                        無論你想預約療癒、詢問課程，或單純想聊聊，
+                        <br>
+                        都歡迎選擇最舒適的方式與我聯繫。
+                        <br>
+                        我會在光裡靜靜等候，溫柔地回應每一份來自心的訊息。
+                    </p>
+                    
+                    <!-- 聯絡方式選項 -->
+                    <div class="contact-options-grid">
+                        <a href="https://lin.ee/0rnlwA1" target="_blank" class="contact-option-card line">
+                            <span class="contact-icon">💬</span>
+                            <h3 class="contact-card-title">LINE 聊聊</h3>
+                            <p class="contact-card-desc">如果你喜歡即時對話，歡迎透過 LINE 和我聊聊，<br>
+隨時分享你的感受與想法，我會靜靜聆聽。</p>
+                        </a>
+                        
+                        <a href="#google-form" class="contact-option-card google-form">
+                            <span class="contact-icon">📝</span>
+                            <h3 class="contact-card-title">表單填寫</h3>
+                            <p class="contact-card-desc">如果你習慣先整理思緒，<br>
+可以用表單溫柔寫下你的需求，我會一一細讀並回應。</p>
+                        </a>
+                    </div>
+                    
+                    <!-- Google 表單嵌入 -->
+                    <div class="contact-form-section" id="google-form">
+                        <h3 class="contact-form-title">填寫表單聯繫我</h3>
+                        <p class="contact-form-desc">
+                            請填寫下方表單，我會收到您的訊息並盡快回覆
+                        </p>
+                        
+                        <div class="google-form-container">
+                            <iframe 
+                                src="https://docs.google.com/forms/d/e/1FAIpQLSfA2YkkBWIyzHnM6T7pIzCfEzo0aNH7TCTwkf0l_0WST1Oo8A/viewform?embedded=true" 
+                                width="100%" 
+                                height="1150" 
+                                frameborder="0" 
+                                marginheight="0" 
+                                marginwidth="0"
+                                class="google-form-iframe">
+                                載入中…
+                            </iframe>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA 區塊 -->
+    <div class="section cc-cta">
+        <div class="container">
+            <div class="cta-wrap">
+                <div>
+                    <div class="cta-text">
+                        <div class="heading-jumbo-small">
+                            願你從今天開始，好好照顧自己的身心
+                            <br>
+                        </div>
+                        <div class="paragraph-bigger cc-bigger-light">
+                            也許你也在尋找一種方式，讓內在回歸平靜與清明。在這裡，你不必急著改變什麼，只要允許自己——被好好接住。
+                            <br>
+                        </div>
+                    </div>
+                    <a href="/contact" class="primary-button cc-jumbo-button w-inline-block">
+                        寫封信給我，也許從這裡開始
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="section">
+        <div class="container">
+            <div class="footer-wrap">
+                <img src="/webclip_256x256.png" loading="lazy" width="60" alt="" class="image-3">
+                <p class="paragraph-2">
+                    <span class="text-span">
+                        <strong>Deo Healing 和光天澄</strong>
+                    </span>
+                </p>
+                <p class="paragraph-3"><span class="nobr">願靈氣的光，陪你走回內在的安定與明亮。</span></p>
+                <a href="https://lin.ee/0rnlwA1" target="_blank" style="display: inline-block; text-decoration: none;">
+                    <img src="/LINE_Brand_icon.png" loading="lazy" width="30" alt="" class="image-4">
+                </a>
+                <p class="paragraph-4">
+          <span class="text-span-2">© 2025 <span class="nobr">Deo Healing 和光天澄</span>. 保留所有權利。</span>
+        </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script type="module">
+        // 手機選單功能
+        document.addEventListener("DOMContentLoaded", function() {
+            const menuBtn = document.getElementById("mobile-menu-btn");
+            const mobileMenu = document.getElementById("mobile-menu");
+            const body = document.body;
+            
+            menuBtn.addEventListener("click", function() {
+                if (menuBtn.classList.contains("active")) {
+                    menuBtn.classList.remove("active");
+                    mobileMenu.classList.remove("show");
+                    body.style.overflow = "";
+                } else {
+                    menuBtn.classList.add("active");
+                    mobileMenu.classList.add("show");
+                    body.style.overflow = "hidden";
+                }
+            });
+            
+            // 點擊選單項目關閉選單
+            document.querySelectorAll(".mobile-navigation-item").forEach(item => {
+                item.addEventListener("click", function() {
+                    menuBtn.classList.remove("active");
+                    mobileMenu.classList.remove("show");
+                    body.style.overflow = "";
+                });
+            });
+            
+            // 點擊選單外關閉選單
+            mobileMenu.addEventListener("click", function(e) {
+                if (e.target === mobileMenu) {
+                    menuBtn.classList.remove("active");
+                    mobileMenu.classList.remove("show");
+                    body.style.overflow = "";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
