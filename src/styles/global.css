@@ -1361,7 +1361,7 @@ p {
 /* 文章詳情頁樣式 - 更新 global.css 中的現有樣式 */
 
 .cc-blog-detail {
-  max-width: 800px;
+  max-width: 90%;
   margin: 0 auto;
 }
 
@@ -1391,7 +1391,7 @@ p {
   line-height: 1.8;
   font-size: 16px;
   color: #1a1b1f;
-  max-width: 600px; /* 限制文字寬度 */
+  max-width: 90%; /* 限制文字寬度 */
   margin: 0 auto; /* 置中對齊 */
 }
 
