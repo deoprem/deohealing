@@ -249,8 +249,9 @@ p {
   margin-top: 10px;
   margin-bottom: 15px;
   font-size: 26px;
-  font-weight: 400;
+  font-weight: 100%;
   line-height: 50px;
+  text-wrap: balance;
 }
 
 .paragraph-bigger {
@@ -318,15 +319,17 @@ p {
 /* Grid 布局 */
 .about-grid {
   display: grid;
-  grid-column-gap: 80px;
+  grid-column-gap: 20px;
   grid-row-gap: 30px;
   grid-template-columns: 1fr 2fr;
   align-items: center;
   margin-bottom: 80px;
+  text-wrap: balance;
 }
 
 .about-grid.cc-about-2 {
   grid-template-columns: 2fr 1fr;
+  text-wrap: balance;
 }
 
 /* 文章預覽 */
@@ -588,6 +591,11 @@ p {
     padding: 0 30px;
   }
 
+ 
+
+
+
+/* 991版布局順序調整 */
   .about-grid {
     grid-row-gap: 50px;
     text-align: center;
@@ -596,6 +604,33 @@ p {
 
   .about-grid.cc-about-2 {
     grid-template-columns: 1fr;
+  }
+
+  /* 第一個區塊（關於Deo）：HTML是 div在前，img在後 -> 要變成 img在上，div在下 */
+  .about-grid:not(.cc-about-2) > div:first-child {
+    order: 2;
+  }
+
+  .about-grid:not(.cc-about-2) > img {
+    order: 1;
+  }
+
+  /* 第二個區塊（服務理念）：HTML是 img在前，div在後 -> 保持 img在上，div在下 */
+  .about-grid.cc-about-2 > img {
+    order: 1;
+  }
+
+  .about-grid.cc-about-2 > div {
+    order: 2;
+  }
+
+  /* 991版文字對齊調整 */
+  .about-grid .home-section-wrap {
+    text-align: center;
+  }
+
+  .about-grid .paragraph-light {
+    text-align: center;
   }
 
   .collection-wrap {
@@ -662,6 +697,45 @@ p {
   .collection-wrap {
     grid-template-columns: 1fr;
   }
+
+/* 767版布局順序調整 */
+  .about-grid {
+    grid-row-gap: 30px;
+    text-align: center;
+    grid-template-columns: 1fr;
+  }
+
+  .about-grid.cc-about-2 {
+    grid-template-columns: 1fr;
+  }
+
+  /* 第一個區塊（關於Deo）：HTML是 div在前，img在後 -> 要變成 img在上，div在下 */
+  .about-grid:not(.cc-about-2) > div:first-child {
+    order: 2;
+  }
+
+  .about-grid:not(.cc-about-2) > img {
+    order: 1;
+  }
+
+  /* 第二個區塊（服務理念）：HTML是 img在前，div在後 -> 保持 img在上，div在下 */
+  .about-grid.cc-about-2 > img {
+    order: 1;
+  }
+
+  .about-grid.cc-about-2 > div {
+    order: 2;
+  }
+
+  /* 767版文字對齊調整 */
+  .about-grid .home-section-wrap {
+    text-align: center;
+  }
+
+  .about-grid .paragraph-light {
+    text-align: center;
+  }
+
 
   /* 導覽選單控制 */
   .navigation-items {
