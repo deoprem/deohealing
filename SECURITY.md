@@ -14,9 +14,8 @@ currently being supported with security updates.
 
 ## Reporting a Vulnerability
 
-If you find a security vulnerability, please report it via email.
+If you discover a security vulnerability, please report it using GitHub's [private vulnerability reporting tool](../../security/advisories).
 
-- 📬 **Email**: deo@deoheal.com  
 - 📅 **Response time**: We usually respond within 3–5 business days.  
 - ✅ **What to expect**:  
   - We'll confirm receipt of your report.  
