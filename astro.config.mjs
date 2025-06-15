@@ -5,7 +5,6 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://deoheal.com',
-  //base: '/deohealing',
   integrations: [mdx(), sitemap()],
 
   vite: {

@@ -741,7 +741,7 @@ p {
 /* 子頁面 Hero */
 .intro-header.cc-subpage {
   background-color: #000;
-  background-image: url("https://cdn.prod.website-files.com/67fb69191746ed16336a6102/67fbd8c5d4e18aa43383fd05_558731b9e2e0f30992098caa5bbc70c4_aboutDeo2.avif");
+  background-image: url("/aboutDeo2.png");
   background-position: 30% center;
   background-size: cover;
   height: 480px;
@@ -754,6 +754,9 @@ p {
   margin: 80px auto;
 }
 
+.about-story-wrap .paragraph-light {
+  max-width: 100%;
+}
 /* 響應式調整 */
 @media screen and (max-width: 767px) {
   .intro-header.cc-subpage {
@@ -1004,18 +1007,26 @@ p {
   gap: 30px;
   margin: 40px 0 60px 0;
 }
+.contact-section-paragraph {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
 
+/* 通用卡片樣式 */
 .contact-option-card {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  border-radius: 12px;
+  background: linear-gradient(135deg, #edf4f8 0%, #e4eff3 100%);
+  border-radius: 20px;
   padding: 40px 30px;
   text-align: center;
   text-decoration: none;
-  color: #1a1b1f;
+  color: #1a2e3b;
   transition: all 0.3s ease;
-  border: 2px solid transparent;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  font-family: "微軟正黑體", "Noto Sans TC", sans-serif;
 }
 
 .contact-option-card::before {
@@ -1025,61 +1036,56 @@ p {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: linear-gradient(45deg, transparent, rgba(102, 182, 204, 0.1), transparent);
+  background: radial-gradient(circle, rgba(255, 230, 180, 0.12), transparent);
   transform: rotate(45deg);
-  transition: all 0.5s;
+  transition: all 0.5s ease;
   opacity: 0;
+  z-index: 0;
 }
 
 .contact-option-card:hover {
-  transform: translateY(-5px);
-  border-color: #66b6cc;
-  box-shadow: 0 10px 30px rgba(102, 182, 204, 0.2);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(60, 100, 140, 0.12);
 }
 
 .contact-option-card:hover::before {
-  animation: contact-shine 0.6s ease-in-out;
+  opacity: 1;
 }
 
-@keyframes contact-shine {
-  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
-  50% { opacity: 1; }
-  100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
-}
-
-.contact-option-card.email {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-}
-
+/* 個別卡片色系 */
 .contact-option-card.line {
-  background: linear-gradient(135deg, #06c755 0%, #00b04f 100%);
-  color: white;
+  background: linear-gradient(135deg, #d5f2e7, #c0e7d8);
 }
 
 .contact-option-card.google-form {
-  background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
-  color: white;
+  background: linear-gradient(135deg, #d6e8f6, #c6e0f0);
 }
 
+/* icon 與文字 */
 .contact-icon {
-  font-size: 3rem;
-  margin-bottom: 20px;
+  font-size: 2.5rem;
+  margin-bottom: 16px;
   display: block;
+  z-index: 1;
+  position: relative;
 }
 
 .contact-card-title {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 500;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   letter-spacing: 1px;
+  z-index: 1;
+  position: relative;
+  color: #1f2d3d;
 }
 
 .contact-card-desc {
-  font-size: 0.95rem;
-  opacity: 0.9;
-  margin: 0;
-  line-height: 1.5;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #3e5360;
+  z-index: 1;
+  position: relative;
 }
 
 /* 表單樣式調整 */
@@ -1293,11 +1299,11 @@ p {
   opacity: 0.8;
 }
 
-.paragraph-light {
+.blog-paragraph-light {
   font-size: 16px;
   line-height: 1.6;
   margin-bottom: 15px;
-  max-width: 600px;
+  max-width: 100%;
 }
 
 .label.cc-blog-date {

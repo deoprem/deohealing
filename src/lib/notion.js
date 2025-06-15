@@ -43,8 +43,7 @@ async function getBlogPosts() {
     slug: post.properties.Slug.rich_text[0]?.plain_text || 'no-slug',
     date: post.properties.Date.date?.start || '',
     summary: post.properties.Summary.rich_text[0]?.plain_text || '',
-    coverImage: post.properties['Cover Image']?.files[0]?.file?.url || 
-                post.properties['Cover Image']?.files[0]?.external?.url || null,
+    coverImage: post.properties['Cover Image']?.url || null,
   }))
 }
 
@@ -75,7 +74,7 @@ async function getBlogPost(slug) {
 
   // 獲取頁面內容
   const pageContent = await getNotionPageContent(pageId)
-
+const defaultCoverImage = 'https://deoheal.com/home2.png'
   return {
     id: pageId,
     title: post.properties.Name.title[0]?.plain_text || '未命名',
@@ -84,8 +83,7 @@ async function getBlogPost(slug) {
     summary: post.properties.Summary.rich_text[0]?.plain_text || '',
     content: pageContent.markdown,
     contentHtml: pageContent.html,
-    coverImage: post.properties['Cover Image']?.files[0]?.file?.url || 
-                post.properties['Cover Image']?.files[0]?.external?.url || null,
+    coverImage: post.properties['Cover Image']?.url || null,
     metaDescription: post.properties.Summary.rich_text[0]?.plain_text || '',
   }
 }
