@@ -201,13 +201,14 @@ p {
   display: inline-block;
   border: none;
   cursor: pointer;
+   text-wrap: balance;
 }
 
 /* Hero 區塊 */
 .intro-header {
   color: #fff;
   background-color: #f4f4f4;
-  background-image: url("https://cdn.prod.website-files.com/67fb69191746ed16336a6102/67fb6c82711f1499327bdc9d_portfolio%202%20-%20wide.avif");
+  background-image: url("portfolio 2 - wide.png");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -747,11 +748,22 @@ p {
 
 /* 子頁面 Hero */
 .intro-header.cc-subpage {
-  background-color: #000;
+  background-color: #f4f7f9;
   background-image: url("/aboutDeo2.png");
   background-position: 30% center;
   background-size: cover;
+  background-repeat: no-repeat;
   height: 480px;
+  animation: fadeInBg 0.8s ease-in forwards;
+}
+
+@keyframes fadeInBg {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* 關於我故事區塊 */
