@@ -5,7 +5,6 @@ import '../../styles/global.css';
 // 生成靜態路徑 - 必須 export
 export async function getStaticPaths() {
   try {
-    // 動態導入避免構建時的問題
     const { getBlogPosts } = await import('../../lib/notion.js')
     const posts = await getBlogPosts()
     
@@ -38,198 +37,172 @@ if (!post) {
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="utf-8"/>
-    <title>{post.title} | 靈氣療癒部落格 | Deo Healing 和光天澄</title>
-    <meta content={post.metaDescription || post.summary || post.title} name="description"/>
-    <meta content={`${post.title}｜靈氣療癒部落格｜Deo Healing 和光天澄`} property="og:title"/>
-    <meta content={post.metaDescription || post.summary || post.title} property="og:description"/>
-    <meta content={post.coverImage || "/Open Graph.png"} property="og:image"/>
-    <meta content={`${post.title}｜靈氣療癒部落格｜Deo Healing 和光天澄`} property="twitter:title"/>
-    <meta content={post.metaDescription || post.summary || post.title} property="twitter:description"/>
-    <meta content={post.coverImage || "/Open Graph.png"} property="twitter:image"/>
-    <meta property="og:type" content="article"/>
-    <meta content="summary_large_image" name="twitter:card"/>
-    <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <meta content="k5Bmk6Cy5aXG85mPbnY3Y8okD5YiYMdP7FJBud3U8Xc" name="google-site-verification"/>
-    
-    <!-- Favicon -->
-    <link href="/webclip_small.png" rel="shortcut icon" type="image/x-icon"/>
-    <link href="/webclip_256x256.png" rel="apple-touch-icon"/>
-    <link rel="canonical" href="https://deoheal.com/" />
+  <meta charset="utf-8"/>
+  <title>{post.title} | 靈氣療癒部落格 | Deo Healing 和光天澄</title>
+  <meta content={post.metaDescription || post.summary || post.title} name="description"/>
+  <meta content={`${post.title}｜靈氣療癒部落格｜Deo Healing 和光天澄`} property="og:title"/>
+  <meta content={post.metaDescription || post.summary || post.title} property="og:description"/>
+  <meta content={post.coverImage || "/Open Graph.png"} property="og:image"/>
+  <meta content={`${post.title}｜靈氣療癒部落格｜Deo Healing 和光天澄`} property="twitter:title"/>
+  <meta content={post.metaDescription || post.summary || post.title} property="twitter:description"/>
+  <meta content={post.coverImage || "/Open Graph.png"} property="twitter:image"/>
+  <meta property="og:type" content="article"/>
+  <meta content="summary_large_image" name="twitter:card"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="k5Bmk6Cy5aXG85mPbnY3Y8okD5YiYMdP7FJBud3U8Xc" name="google-site-verification"/>
+  <link href="/webclip_small.png" rel="shortcut icon" type="image/x-icon"/>
+  <link href="/webclip_256x256.png" rel="apple-touch-icon"/>
+  <link rel="canonical" href="https://deoheal.com/" />
 </head>
 <body>
-    <!-- 導覽列 -->
-    <div class="navigation">
-        <div class="navigation-wrap">
-            <a href="/" class="logo-link w-inline-block">
-                <img src="/business-logo3@2x.png" width="250" alt="Deo Healing Logo" class="logo-image">
-            </a>
-            <!-- 桌面版導覽 -->
-            <nav class="navigation-items">
-                <a href="/" class="navigation-item">首頁</a>
-                <a href="/aboutdeo" class="navigation-item">關於Deo</a>
-                <a href="/services" class="navigation-item">服務項目</a>
-                <a href="/courses" class="navigation-item">課程資訊</a>
-                <a href="/blog" class="navigation-item">靈氣文章</a>
-                <a href="/contact" class="navigation-item">聯絡我</a>
-            </nav>
-            <!-- 手機版漢堡選單按鈕 -->
-            <div class="menu-button w-nav-button" id="mobile-menu-btn">
-                <div class="menu-icon">
-                    <div class="menu-line"></div>
-                    <div class="menu-line"></div>
-                    <div class="menu-line"></div>
-                </div>
-            </div>
-            <!-- 桌面版聯絡按鈕 -->
-            <a href="/contact" class="primary-button cc-contact-us">
-                聯絡我
-            </a>
+  <!-- 導覽列 -->
+  <div class="navigation">
+    <div class="navigation-wrap">
+      <a href="/" class="logo-link w-inline-block">
+        <img src="/business-logo3@2x.png" width="400" alt="Deo Healing Logo" class="logo-image">
+      </a>
+      <nav class="navigation-items">
+        <a href="/" class="navigation-item">首頁</a>
+        <a href="/aboutdeo" class="navigation-item">關於Deo</a>
+        <a href="/services" class="navigation-item">服務項目</a>
+        <a href="/courses" class="navigation-item">課程資訊</a>
+        <a href="/blog" class="navigation-item">靈氣文章</a>
+        <a href="/contact" class="navigation-item">聯絡我</a>
+      </nav>
+      <div class="menu-button w-nav-button" id="mobile-menu-btn">
+        <div class="menu-icon">
+          <div class="menu-line"></div>
+          <div class="menu-line"></div>
+          <div class="menu-line"></div>
         </div>
-        <!-- 手機版導覽選單 -->
-        <div class="mobile-menu" id="mobile-menu">
-            <nav class="mobile-navigation-items">
-                <a href="/" class="mobile-navigation-item">首頁</a>
-                <a href="/aboutdeo" class="mobile-navigation-item">關於Deo</a>
-                <a href="/services" class="mobile-navigation-item">服務項目</a>
-                <a href="/courses" class="mobile-navigation-item">課程資訊</a>
-                <a href="/blog" class="mobile-navigation-item">靈氣文章</a>
-                <a href="/contact" class="mobile-navigation-item">聯絡我</a>
-            </nav>
-        </div>
+      </div>
+      <a href="/contact" class="primary-button cc-contact-us">聯絡我</a>
     </div>
-
-    <!-- 文章內容區塊 -->
-    <div class="section">
-        <div class="container">
-            <div class="cc-blog-detail">
-                <!-- 文章標題和日期 -->
-                <div class="blog-detail-header-wrap">
-                    <h1>{post.title}</h1>
-                    <div class="label cc-blog-date">
-                        {new Date(post.date).toLocaleDateString('zh-TW', { 
-                            year: 'numeric', 
-                            month: 'long', 
-                            day: 'numeric' 
-                        })}
-                    </div>
-                </div>
-                
-                <!-- 封面圖片 -->
-                {post.coverImage && (
-                    <div 
-                        style={`background-image:url("${post.coverImage}")`} 
-                        class="detail-header-image">
-                    </div>
-                )}
-                
-                <!-- 文章內容 -->
-                <div class="rich-text w-richtext">
-                    {post.content && post.contentHtml ? (
-                        <div set:html={post.contentHtml}></div>
-                    ) : (
-                        <p>文章內容載入中...</p>
-                    )}
-                </div>
-            </div>
-        </div>
+    <div class="mobile-menu" id="mobile-menu">
+      <nav class="mobile-navigation-items">
+        <a href="/" class="mobile-navigation-item">首頁</a>
+        <a href="/aboutdeo" class="mobile-navigation-item">關於Deo</a>
+        <a href="/services" class="mobile-navigation-item">服務項目</a>
+        <a href="/courses" class="mobile-navigation-item">課程資訊</a>
+        <a href="/blog" class="mobile-navigation-item">靈氣文章</a>
+        <a href="/contact" class="mobile-navigation-item">聯絡我</a>
+      </nav>
     </div>
+  </div>
 
-    <!-- 返回文章列表 -->
-    <div class="section">
-        <div class="container">
-            <div style="text-align: center; margin: 40px 0;">
-                <a href="/blog" class="primary-button">
-                    返回文章列表
-                </a>
-            </div>
+  <!-- 文章內容區塊 -->
+  <div class="section cc-blog-article">
+    <div class="container">
+      <div class="cc-blog-detail">
+        <!-- 文章標題和日期 -->
+        <div class="blog-detail-header-wrap">
+          <h1>{post.title}</h1>
+          <div class="label cc-blog-date">
+            {new Date(post.date).toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </div>
         </div>
-    </div>
 
-    <!-- CTA 區塊 -->
-    <div class="section cc-cta">
-        <div class="container">
-            <div class="cta-wrap">
-                <div>
-                    <div class="cta-text">
-                        <div class="heading-jumbo-small">
-                            願你從今天開始，好好照顧自己的身心
-                            <br>
-                        </div>
-                        <div class="paragraph-bigger cc-bigger-light">
-                            也許你也在尋找一種方式，讓內在回歸平靜與清明。<br>在這裡，你不必急著改變什麼，<br>只要允許自己——被好好接住。
-                            <br>
-                        </div>
-                    </div>
-                    <a href="/contact" class="primary-button cc-jumbo-button w-inline-block">
-                        寫封信給我，也許從這裡開始
-                    </a>
-                </div>
-            </div>
+        <!-- 封面圖片 -->
+        {post.coverImage && (
+          <div style={`background-image:url("${post.coverImage}")`} class="detail-header-image"></div>
+        )}
+
+        <!-- 文章內容 -->
+        <div class="rich-text w-richtext">
+          {post.content && post.contentHtml ? (
+            <div set:html={post.contentHtml}></div>
+          ) : (
+            <p>文章內容載入中...</p>
+          )}
         </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Footer -->
-    <div class="section">
-        <div class="container">
-            <div class="footer-wrap">
-                <img src="/webclip_256x256.png" loading="lazy" width="60" alt="" class="image-3">
-                <p class="paragraph-2">
-                    <span class="text-span">
-                        <strong>Deo Healing 和光天澄</strong>
-                    </span>
-                </p>
-                <p class="paragraph-3"><span class="nobr">願靈氣的光，陪你走回內在的安定與明亮。</span></p>
-                <a href="https://lin.ee/0rnlwA1" target="_blank" style="display: inline-block; text-decoration: none;">
-                    <img src="/LINE_Brand_icon.png" loading="lazy" width="30" alt="" class="image-4">
-                </a>
-                <p class="paragraph-4">
+  <!-- 返回文章列表 -->
+  <div class="section">
+    <div class="container">
+      <div style="text-align: center; margin: 40px 0;">
+        <a href="/blog" class="primary-button">
+          返回文章列表
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA 區塊 -->
+  <div class="section cc-cta">
+    <div class="container">
+      <div class="cta-wrap">
+        <div>
+          <div class="cta-text">
+            <div class="heading-jumbo-small">
+              願你從今天開始，好好照顧自己的身心
+            </div>
+            <div class="paragraph-bigger cc-bigger-light">
+              也許你也在尋找一種方式，讓內在回歸平靜與清明。<br />
+              在這裡，你不必急著改變什麼，<br />
+              只要允許自己——被好好接住。
+            </div>
+          </div>
+          <a href="/contact" class="primary-button cc-jumbo-button w-inline-block">
+            寫封信給我，也許從這裡開始
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="section">
+    <div class="container">
+      <div class="footer-wrap">
+        <img src="/webclip_256x256.png" loading="lazy" width="60" alt="" class="image-3" />
+        <p class="paragraph-2"><strong>Deo Healing 和光天澄</strong></p>
+        <p class="paragraph-3"><span class="nobr">願靈氣的光，陪你走回內在的安定與明亮。</span></p>
+        <a href="https://lin.ee/0rnlwA1" target="_blank" style="display: inline-block; text-decoration: none;">
+          <img src="/LINE_Brand_icon.png" loading="lazy" width="30" alt="" class="image-4" />
+        </a>
+        <p class="paragraph-4">
           <span class="text-span-2">© 2025 <span class="nobr">Deo Healing 和光天澄</span>. 保留所有權利。</span>
         </p>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- JavaScript -->
-    <script type="module">
-        // 手機選單功能
-        document.addEventListener("DOMContentLoaded", function() {
-            const menuBtn = document.getElementById("mobile-menu-btn");
-            const mobileMenu = document.getElementById("mobile-menu");
-            const body = document.body;
-            
-            if (menuBtn && mobileMenu) {
-                menuBtn.addEventListener("click", function() {
-                    if (menuBtn.classList.contains("active")) {
-                        menuBtn.classList.remove("active");
-                        mobileMenu.classList.remove("show");
-                        body.style.overflow = "";
-                    } else {
-                        menuBtn.classList.add("active");
-                        mobileMenu.classList.add("show");
-                        body.style.overflow = "hidden";
-                    }
-                });
-                
-                // 點擊選單項目關閉選單
-                document.querySelectorAll(".mobile-navigation-item").forEach(item => {
-                    item.addEventListener("click", function() {
-                        menuBtn.classList.remove("active");
-                        mobileMenu.classList.remove("show");
-                        body.style.overflow = "";
-                    });
-                });
-                
-                // 點擊選單外關閉選單
-                mobileMenu.addEventListener("click", function(e) {
-                    if (e.target === mobileMenu) {
-                        menuBtn.classList.remove("active");
-                        mobileMenu.classList.remove("show");
-                        body.style.overflow = "";
-                    }
-                });
-            }
+  <!-- JavaScript -->
+  <script type="module">
+    // 手機選單功能
+    document.addEventListener("DOMContentLoaded", function () {
+      const menuBtn = document.getElementById("mobile-menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const body = document.body;
+
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener("click", function () {
+          const isOpen = menuBtn.classList.contains("active");
+          menuBtn.classList.toggle("active", !isOpen);
+          mobileMenu.classList.toggle("show", !isOpen);
+          body.style.overflow = isOpen ? "" : "hidden";
         });
-    </script>
+
+        document.querySelectorAll(".mobile-navigation-item").forEach(item => {
+          item.addEventListener("click", () => {
+            menuBtn.classList.remove("active");
+            mobileMenu.classList.remove("show");
+            body.style.overflow = "";
+          });
+        });
+
+        mobileMenu.addEventListener("click", function (e) {
+          if (e.target === mobileMenu) {
+            menuBtn.classList.remove("active");
+            mobileMenu.classList.remove("show");
+            body.style.overflow = "";
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>

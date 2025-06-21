@@ -103,7 +103,7 @@ p {
 /* 導覽列 */
 .navigation {
   background-color: transparent;
-  padding: 30px 0;
+  padding: 10px 0px 10px 0px;
   position: relative;
   z-index: 1000;
 }
@@ -128,7 +128,7 @@ p {
 
 .logo-image {
   display: block;
-  max-width: 250px;
+  max-width: 280px;
   height: auto;
 }
 
@@ -144,9 +144,9 @@ p {
   letter-spacing: 1px;
   text-transform: uppercase;
   padding: 9px 20px;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 500;
-  line-height: 20px;
+  line-height: 24px;
   color: #1a1b1f;
   text-decoration: none;
   display: inline-block;
@@ -169,7 +169,7 @@ p {
   background-color: #66b6cc;
   border-radius: 0;
   padding: 12px 25px;
-  font-size: 12px;
+  font-size: 16px;
   line-height: 20px;
   text-decoration: none;
   transition: background-color .4s;
@@ -835,8 +835,11 @@ p {
   background-position: 30% center;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 480px;
+  height: 620px;
   animation: fadeInBg 0.8s ease-in forwards;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @keyframes fadeInBg {
@@ -1658,3 +1661,17 @@ p {
   #thankyou-box.fade-out {
     opacity: 0;
   }
+/* 子頁面內容 padding-top，讓內容與導覽列有留白，與首頁一致 */
+.intro-header.cc-subpage .intro-content {
+  padding-top: 100px;
+}
+
+/* 首頁 Hero 下方容器上方留白統一控制 */
+.section.cc-home-wrap {
+  padding-top: 0px;
+}
+
+.section.cc-blog-article {
+  padding-top: 0;
+  padding-bottom: 0;
+}
