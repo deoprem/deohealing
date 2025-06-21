@@ -11,6 +11,55 @@ import '../styles/global.css';
     <meta name="description" content="想預約靈氣療癒、詢問課程、或與 Deo 聯繫合作，都歡迎從這裡留言給我們。Deo Healing 和光天澄，溫柔回應每一份來自心的訊息。">
     <link rel="preload" as="image" href="/aboutDeo2.png">
     <link rel="canonical" href="https://deoheal.com/" />
+    <!-- 在 <head> 或頁尾先引入 reCAPTCHA v3 -->
+<script src="https://www.google.com/recaptcha/api.js?render=6LcW_WgrAAAAANBjYH_7AkLgHGNtZXsD_kPNknsI"></script>
+
+<script>
+    declare const grecaptcha: any;
+  document.getElementById("reiki-form")?.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+
+    // ✅ 執行 reCAPTCHA 驗證
+    grecaptcha.ready(() => {
+      grecaptcha.execute("6LcW_WgrAAAAANBjYH_7AkLgHGNtZXsD_kPNknsI", { action: "submit" }).then((token: string) => {
+        // 將 token 加入到 formData 中
+        formData.append("g-recaptcha-response", token);
+
+        // ✅ 實際送出表單
+        fetch("https://script.google.com/macros/s/AKfycbxEBACXF7w9LaPQDef9tx0_kx4_-UQb-mO-sQ_1jO0APRQXpKMdhKfhUCDEl62rXgLg/exec", {
+          method: "POST",
+          body: formData,
+        })
+        .then(() => {
+          form.reset();
+
+          const overlay = document.getElementById("thankyou-overlay");
+          const box = document.getElementById("thankyou-box");
+
+          overlay!.style.display = "flex";
+          box!.classList.add("fade-in");
+
+          setTimeout(() => {
+            box!.classList.remove("fade-in");
+            box!.classList.add("fade-out");
+            setTimeout(() => {
+              overlay!.style.display = "none";
+              box!.classList.remove("fade-out");
+            }, 1000);
+          }, 3000);
+        })
+        .catch(() => {
+          alert("⚠️ 送出失敗，請稍後再試。");
+        });
+
+        console.log("留言欄位送出的內容是：", formData.get("message"));
+      });
+    });
+  });
+</script>
 </head>
 <body>
     <!-- 導覽列 -->
@@ -111,6 +160,7 @@ import '../styles/global.css';
   <textarea name="message" required placeholder="例：我想預約靈氣療癒，也想了解課程內容"></textarea>
 
   <button type="submit">送出這份訊息</button>
+  <div class="g-recaptcha" data-sitekey="6Lf5kFMrAAAAAD2M8_fnIaF2V1j85Z9biMLALFPY"></div>
 </form>
 
 <!-- 成功提示浮出框 -->
@@ -122,41 +172,43 @@ import '../styles/global.css';
 
 <!-- 表單處理邏輯 -->
 <script>
-  document.getElementById("reiki-form").addEventListener("submit", function(e) {
-    
-    e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
-    const params = new URLSearchParams(formData);
+  document.getElementById("reiki-form")?.addEventListener("submit", function(e) {
+  e.preventDefault();
 
+  const form = e.target as HTMLFormElement;
+  const formData = new FormData(form);
+  const params = new URLSearchParams(
+  Object.fromEntries(formData.entries()) as Record<string, string>
+);
 
-    fetch("https://script.google.com/macros/s/AKfycbxEBACXF7w9LaPQDef9tx0_kx4_-UQb-mO-sQ_1jO0APRQXpKMdhKfhUCDEl62rXgLg/exec", {
-      method: "POST",
-      body: params,
-    })
-    .then(() => {
-      form.reset();
+  fetch("https://script.google.com/macros/s/AKfycbxEBACXF7w9LaPQDef9tx0_kx4_-UQb-mO-sQ_1jO0APRQXpKMdhKfhUCDEl62rXgLg/exec", {
+    method: "POST",
+    body: params,
+  })
+  .then(() => {
+    form.reset();
 
-      const overlay = document.getElementById("thankyou-overlay");
-      const box = document.getElementById("thankyou-box");
+    const overlay = document.getElementById("thankyou-overlay");
+    const box = document.getElementById("thankyou-box");
 
-      overlay.style.display = "flex";
-      box.classList.add("fade-in");
+    overlay!.style.display = "flex";
+    box!.classList.add("fade-in");
 
+    setTimeout(() => {
+      box!.classList.remove("fade-in");
+      box!.classList.add("fade-out");
       setTimeout(() => {
-        box.classList.remove("fade-in");
-        box.classList.add("fade-out");
-        setTimeout(() => {
-          overlay.style.display = "none";
-          box.classList.remove("fade-out");
-        }, 1000);
-      }, 3000);
-    })
-    .catch(() => {
-      alert("⚠️ 送出失敗，請稍後再試。");
-    });
-    console.log("留言欄位送出的內容是：", formData.get("message"));
+        overlay!.style.display = "none";
+        box!.classList.remove("fade-out");
+      }, 1000);
+    }, 3000);
+  })
+  .catch(() => {
+    alert("⚠️ 送出失敗，請稍後再試。");
   });
+
+  console.log("留言欄位送出的內容是：", formData.get("message"));
+});
   
   
 </script>
@@ -248,5 +300,6 @@ import '../styles/global.css';
             });
         });
     </script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 </html>

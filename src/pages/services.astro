@@ -160,30 +160,33 @@ import "../styles/global.css";
 
   <!-- JavaScript -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const menuBtn = document.getElementById('mobile-menu-btn');
-      const mobileMenu = document.getElementById('mobile-menu');
-      const body = document.body;
+  document.addEventListener('DOMContentLoaded', function () {
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const body = document.body;
 
+    if (menuBtn && mobileMenu) {
       // 漢堡選單點擊事件
-      menuBtn.addEventListener('click', function() {
+      menuBtn.addEventListener('click', function () {
         const isActive = menuBtn.classList.contains('active');
-        
+
         if (isActive) {
+          // 關閉選單
           menuBtn.classList.remove('active');
           mobileMenu.classList.remove('show');
-          body.style.overflow = '';
+          body.style.overflow = ''; // 恢復捲動
         } else {
+          // 開啟選單
           menuBtn.classList.add('active');
           mobileMenu.classList.add('show');
-          body.style.overflow = 'hidden';
+          body.style.overflow = 'hidden'; // 禁止背景捲動
         }
       });
 
       // 點擊選單項目後關閉選單
       const mobileNavItems = document.querySelectorAll('.mobile-navigation-item');
-      mobileNavItems.forEach(item => {
-        item.addEventListener('click', function() {
+      mobileNavItems.forEach((item) => {
+        item.addEventListener('click', function () {
           menuBtn.classList.remove('active');
           mobileMenu.classList.remove('show');
           body.style.overflow = '';
@@ -191,14 +194,30 @@ import "../styles/global.css";
       });
 
       // 點擊選單外部關閉選單
-      mobileMenu.addEventListener('click', function(e) {
+      mobileMenu.addEventListener('click', function (e) {
         if (e.target === mobileMenu) {
           menuBtn.classList.remove('active');
           mobileMenu.classList.remove('show');
           body.style.overflow = '';
         }
       });
-    });
-  </script>
+    }
+
+    // 原有的淡入動畫
+    const fadeElements = document.querySelectorAll<HTMLElement>(
+  '.heading-jumbo, .paragraph-bigger, .section-heading'
+);
+fadeElements.forEach((el, index) => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+
+  setTimeout(() => {
+    el.style.opacity = '1';
+    el.style.transform = 'translateY(0)';
+  }, index * 100 + 200);
+});
+  });
+</script>
 </body>
 </html>

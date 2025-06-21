@@ -1,6 +1,9 @@
 ---
 import { getBlogPosts } from '../lib/notion.js'
 import '../styles/global.css';
+import { Image } from 'astro:assets'
+import home2 from '../assets/images/home2.png'
+import homeAbout from '../assets/images/home-about.png'
 
 // 獲取最新的 3 篇文章
 const allPosts = await getBlogPosts()
@@ -87,7 +90,7 @@ const latestPosts = allPosts.slice(0, 3)
     <div class="container">
       <!-- 信念文字段 -->
       <div class="motto-wrap">
-        <div class="label cc-light">我們相信 溫柔與真實，是療癒真正的起點</div>
+        <div class="label cc-light"><br/><br/>我們相信 溫柔與真實，是療癒真正的起點</div>
         <div class="heading-jumbo-small">
           療癒不是修補，而是重新與自己相遇
         </div>
@@ -118,19 +121,42 @@ const latestPosts = allPosts.slice(0, 3)
               <p class="paragraph-light">
                 現在的我，想把這份穩定與溫柔分享給你，陪你回到心裡最安靜的那個地方。
               </p>
-            </div>
-            <a href="/aboutdeo" class="primary-button w-inline-block">
+              <div class="icrt-certification">
+  <a href="http://www.reikimembership.com" target="_blank" rel="noopener">
+    <img src="/RMAproMemberLogo-500.png" alt="ICRT 專業會員標章" />
+  </a>
+  <p>
+    Deo 為
+    <a href="http://www.reikimembership.com" target="_blank">
+      ICRT 國際靈氣協會
+    </a>
+    認證之專業會員。
+  </p>
+</div>
+                        </div>
+            
+
+<a href="/aboutdeo" class="primary-button w-inline-block">
               從這裡開始認識我
             </a>
+            
           </div>
-          <img src="/home-about.png" alt="About me" style="width: 100%; height: auto; object-fit: cover; border-radius: 8px;"/>
+          <Image 
+  src={homeAbout} 
+  width={1536} 
+  height={1024} 
+  alt="About me"
+  style="width: 100%; height: auto; object-fit: cover; border-radius: 8px;" 
+/>
         </div>
 
       
     <!-- 服務理念區塊 - 修正版（圖片在左，文字在右）-->
 <div class="about-grid cc-about-2">
   <!-- 先放圖片 -->
-  <img src="/home2.png" alt="Service" style="width: 100%; height: auto; object-fit: cover; border-radius: 8px;"/>
+  <div style="width: 100%;">
+  <Image src={home2} width={1536} height={1024} alt="Service" style="border-radius: 8px; object-fit: cover; width: 100%; height: auto;" />
+</div>
   
   <!-- 後放文字 -->
   <div>
@@ -260,73 +286,78 @@ const latestPosts = allPosts.slice(0, 3)
       const fadeElements = document.querySelectorAll('.heading-jumbo, .paragraph-bigger, .section-heading');
       
       fadeElements.forEach((el, index) => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        
-        setTimeout(() => {
-          el.style.opacity = '1';
-          el.style.transform = 'translateY(0)';
-        }, index * 100 + 200);
+         const element = el as HTMLElement; // ✅ 類型斷言
+
+         element.style.opacity = '0';
+         element.style.transform = 'translateY(20px)';
+         element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+
+         setTimeout(() => {
+          element.style.opacity = '1';
+          element.style.transform = 'translateY(0)';
+         }, index * 100 + 200);
       });
     });
   </script>
   <!-- 在你的 index.astro 的 </body> 標籤前添加這段 JavaScript -->
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     const menuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     const body = document.body;
 
-    // 漢堡選單點擊事件
-    menuBtn.addEventListener('click', function() {
-      const isActive = menuBtn.classList.contains('active');
-      
-      if (isActive) {
-        // 關閉選單
-        menuBtn.classList.remove('active');
-        mobileMenu.classList.remove('show');
-        body.style.overflow = ''; // 恢復捲動
-      } else {
-        // 開啟選單
-        menuBtn.classList.add('active');
-        mobileMenu.classList.add('show');
-        body.style.overflow = 'hidden'; // 禁止背景捲動
-      }
-    });
+    if (menuBtn && mobileMenu) {
+      // 漢堡選單點擊事件
+      menuBtn.addEventListener('click', function () {
+        const isActive = menuBtn.classList.contains('active');
 
-    // 點擊選單項目後關閉選單
-    const mobileNavItems = document.querySelectorAll('.mobile-navigation-item');
-    mobileNavItems.forEach(item => {
-      item.addEventListener('click', function() {
-        menuBtn.classList.remove('active');
-        mobileMenu.classList.remove('show');
-        body.style.overflow = '';
+        if (isActive) {
+          // 關閉選單
+          menuBtn.classList.remove('active');
+          mobileMenu.classList.remove('show');
+          body.style.overflow = ''; // 恢復捲動
+        } else {
+          // 開啟選單
+          menuBtn.classList.add('active');
+          mobileMenu.classList.add('show');
+          body.style.overflow = 'hidden'; // 禁止背景捲動
+        }
       });
-    });
 
-    // 點擊選單外部關閉選單
-    mobileMenu.addEventListener('click', function(e) {
-      if (e.target === mobileMenu) {
-        menuBtn.classList.remove('active');
-        mobileMenu.classList.remove('show');
-        body.style.overflow = '';
-      }
-    });
+      // 點擊選單項目後關閉選單
+      const mobileNavItems = document.querySelectorAll('.mobile-navigation-item');
+      mobileNavItems.forEach((item) => {
+        item.addEventListener('click', function () {
+          menuBtn.classList.remove('active');
+          mobileMenu.classList.remove('show');
+          body.style.overflow = '';
+        });
+      });
+
+      // 點擊選單外部關閉選單
+      mobileMenu.addEventListener('click', function (e) {
+        if (e.target === mobileMenu) {
+          menuBtn.classList.remove('active');
+          mobileMenu.classList.remove('show');
+          body.style.overflow = '';
+        }
+      });
+    }
 
     // 原有的淡入動畫
-    const fadeElements = document.querySelectorAll('.heading-jumbo, .paragraph-bigger, .section-heading');
-    
-    fadeElements.forEach((el, index) => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      
-      setTimeout(() => {
-        el.style.opacity = '1';
-        el.style.transform = 'translateY(0)';
-      }, index * 100 + 200);
-    });
+    const fadeElements = document.querySelectorAll<HTMLElement>(
+  '.heading-jumbo, .paragraph-bigger, .section-heading'
+);
+fadeElements.forEach((el, index) => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+
+  setTimeout(() => {
+    el.style.opacity = '1';
+    el.style.transform = 'translateY(0)';
+  }, index * 100 + 200);
+});
   });
 </script>
 </body>

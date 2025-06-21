@@ -71,6 +71,7 @@ import "../styles/global.css";
       <!-- 信念文字段 -->
       <div class="motto-wrap">
         <div class="heading-jumbo-small">
+          <br/>
           我相信，<br/>
           每個人都值得擁有一份平靜與信任，<br/>
           而療癒，<br/>
@@ -83,7 +84,7 @@ import "../styles/global.css";
       <!-- 關於我的詳細介紹 -->
       <div class="about-story-wrap">
         <p class="paragraph-light">
-          關於我｜Deo 迪奧 靈氣老師・靜心引導者<br/><br/>
+          <strong>關於我｜Deo 迪奧 靈氣老師・靜心引導者</strong><br/><br/>
           有時候，只是輕輕地把雙手抱在胸口，就能感覺到一點溫暖。<br/>
           一點點安心，一點點微笑，好像這個世界不再那麼急了。<br/>
           這種「回到自己」的感覺，正是我在靈氣教學中最想傳遞給學生的。<br/><br/>
@@ -101,7 +102,7 @@ import "../styles/global.css";
           現在的我，正在分享這些年來的學習與經驗，<br/>
           讓靈氣成為生活中柔軟而堅定的力量，<br/>
           陪伴每個人，走回自己心裡最穩定的位置。<br/><br/>
-          靈氣與靈性學習歷程：<br/>
+          <strong>靈氣與靈性學習歷程：</strong><br/>
           • 2001｜ 面相學入門<br/>
           • 2017｜ 占星、盧恩符文、塔羅占卜<br/>
           • 2018｜ 臼井靈氣 一、二階（AKASH）、水晶能量課程 一、二階（AKASH）<br/>
@@ -109,8 +110,14 @@ import "../styles/global.css";
           • 2020｜ 直傳靈氣 初傳與奧傳、SITH 荷歐波諾波諾 商業課程，開始教學臼井／聖火 III 靈氣<br/>
           • 2023｜ 專業靈氣與心靈療癒師（AKASH）<br/>
           • 2024｜ 臼井／聖火 III 靈氣 一、二階（ICRT｜William）、聖火 III 卡魯那靈氣 師父階（ICRT｜William）、SITH 荷歐波諾波諾 基礎二課程<br/>
-          　　 　  成為 ICRT Reiki Membership Association 專業會員
+          　　 　  <div class="icrt-inline-certification">
+  <strong>成為 ICRT Reiki Membership Association 專業會員</strong>
+  <a href="http://www.reikimembership.com" target="_blank" rel="noopener">
+    <img src="/RMAproMemberLogo-500.png" alt="ICRT 專業會員標章" />
+  </a>
+</div>
         </p>
+    
       </div>
 
       <div class="divider"></div>
@@ -165,30 +172,33 @@ import "../styles/global.css";
 
   <!-- JavaScript -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const menuBtn = document.getElementById('mobile-menu-btn');
-      const mobileMenu = document.getElementById('mobile-menu');
-      const body = document.body;
+  document.addEventListener('DOMContentLoaded', function () {
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const body = document.body;
 
+    if (menuBtn && mobileMenu) {
       // 漢堡選單點擊事件
-      menuBtn.addEventListener('click', function() {
+      menuBtn.addEventListener('click', function () {
         const isActive = menuBtn.classList.contains('active');
-        
+
         if (isActive) {
+          // 關閉選單
           menuBtn.classList.remove('active');
           mobileMenu.classList.remove('show');
-          body.style.overflow = '';
+          body.style.overflow = ''; // 恢復捲動
         } else {
+          // 開啟選單
           menuBtn.classList.add('active');
           mobileMenu.classList.add('show');
-          body.style.overflow = 'hidden';
+          body.style.overflow = 'hidden'; // 禁止背景捲動
         }
       });
 
       // 點擊選單項目後關閉選單
       const mobileNavItems = document.querySelectorAll('.mobile-navigation-item');
-      mobileNavItems.forEach(item => {
-        item.addEventListener('click', function() {
+      mobileNavItems.forEach((item) => {
+        item.addEventListener('click', function () {
           menuBtn.classList.remove('active');
           mobileMenu.classList.remove('show');
           body.style.overflow = '';
@@ -196,14 +206,30 @@ import "../styles/global.css";
       });
 
       // 點擊選單外部關閉選單
-      mobileMenu.addEventListener('click', function(e) {
+      mobileMenu.addEventListener('click', function (e) {
         if (e.target === mobileMenu) {
           menuBtn.classList.remove('active');
           mobileMenu.classList.remove('show');
           body.style.overflow = '';
         }
       });
-    });
-  </script>
+    }
+
+    // 原有的淡入動畫
+    const fadeElements = document.querySelectorAll<HTMLElement>(
+  '.heading-jumbo, .paragraph-bigger, .section-heading'
+);
+fadeElements.forEach((el, index) => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+
+  setTimeout(() => {
+    el.style.opacity = '1';
+    el.style.transform = 'translateY(0)';
+  }, index * 100 + 200);
+});
+  });
+</script>
 </body>
 </html>
